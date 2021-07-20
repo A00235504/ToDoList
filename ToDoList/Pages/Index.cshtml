@@ -8,3 +8,56 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+@section Scripts {
+    <a href="https://www.google.ca/">Google</a>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+@*<form asp-page="Index">
+    <div>
+        <label asp-for="Customer.FirstName"></label>
+        <input asp-for="Customer.FirstName" />
+        <span asp-validation-for="Customer.FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="Customer.LastName"></label>
+        <input asp-for="Customer.LastName" />
+        <span asp-validation-for="Customer.LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Customer.Email"></label>
+        <input asp-for="Customer.Email" />
+        <span asp-validation-for="Customer.Email"></span>
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>*@
+
+
+<form asp-page="Index">
+    <div>
+            <label asp-for="Customer.FirstName"></label>
+            <input asp-for="Customer.FirstName" />
+            <span asp-validation-for="Customer.FirstName"></span>
+        </div>
+    @*<div>
+            <label asp-for="Customer.LastName"></label>
+            <input asp-for="Customer.LastName" />
+            <span asp-validation-for="Customer.LastName"></span>
+        </div>
+        <div>
+            <label asp-for="Customer.Email"></label>
+            <input asp-for="Customer.Email" />
+            <span asp-validation-for="Customer.Email"></span>
+        </div>*@
+    @*<partial name="_FormInput" for="Customer.FirstName" />
+        <partial name="_FormInput" for="Customer.LastName" />
+        <partial name="_FormInput" for="Customer.Email" />*@
+    <partial name="_FormInput" model="Model.Customer" />
+    <input type="submit" value="Submit" />
+    <label>@Model.Customer.FirstName</label>
+</form>
