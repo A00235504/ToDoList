@@ -12,7 +12,8 @@
                 <div><label>Title: <input type="text" name="updateColor.ShortCode" value="@col.ShortCode" /></label></div>
                 <div><label>Description: <input type="text" name="updateColor.Name" value="@col.Name" /></label></div>
                 <div><label>Date: <input type="text" name="updateColor.RGB" value="@col.RGB" /></label></div>
-                <div><label>Done: <input type="checkbox" name="color.check" checked="@col.check" /></label></div>
+                @*<div><label>Done: <input type="checkbox" name="color.check" checked="@col.check" /></label></div>*@
+                <td>@Html.CheckBoxFor(Model => col.check)</td>
                 <input type="submit" value="Update" />
             </form>
             <form asp-page="Colordelete" method="post">
@@ -33,8 +34,10 @@
     <label>Descriptioin: <input type="text" name="color.Name" /></label>
     @*<label>Date: @DateTime.Now</label>*@
     <label>Date: <input type="datetime" name="color.RGB" value="@DateTime.Now" /></label>
-    <label>Done: <input type="checkbox" name="color.check" value="" /></label>
-    
+    <label>
+        Done:
+        @Html.CheckBoxFor(m => Model.color.check)
+    </label>
     <input type="submit" />
 </form>
 

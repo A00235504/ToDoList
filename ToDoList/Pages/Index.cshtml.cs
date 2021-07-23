@@ -35,12 +35,8 @@ namespace ToDoList.Pages
 
         public async Task OnGetAsync()
         {
-            if (color.check == true) {
 
-                _context.Colors.Update(color);
-                _context.SaveChanges();
-            }
-            //color.check = true;
+  
             if (color.ShortCode != null)
             {
                 
