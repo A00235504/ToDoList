@@ -6,52 +6,75 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ToDoList.Data;
+using ToDoList.Data.Context;
+
 
 namespace ToDoList.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        StoreContext _context;
+        
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
-
-        }
+        [FromQuery]
+        public Color color { get; set; }
 
         [FromForm]
-        public Customer Customer { get; set; }
+        public Color updateColor { get; set; }
 
-        [FromForm(Name = "loginName")]
-        public string LoginName { get; set; }
+        
 
-        [FromForm(Name = "loginPass")]
-        public string LoginPass { get; set; }
+        public IList<Color> colorList { get; set; } = new List<Color>();
 
-        [FromQuery(Name = "leftNumber")]
-        public int leftNumber { get; set; }
+        
 
-        [FromQuery(Name = "rightNumber")]
-        public int rightNumber { get; set; }
-
-        public int Result { get; set; }
-
-        public bool ResultSet { get; set; }
-
-        public async Task<IActionResult> OnPostAsync()
+        public IndexModel(StoreContext context)
         {
-            if (!ModelState.IsValid)
+            _context = context;
+        }
+
+        public async Task OnGetAsync()
+        {
+            if (color.check == true) {
+
+                _context.Colors.Update(color);
+                _context.SaveChanges();
+            }
+            //color.check = true;
+            if (color.ShortCode != null)
             {
-                return Page();
+                
+                _context.Colors.Add(color);
+                _context.SaveChanges();
             }
 
+            colorList = _context.Colors.ToList();
            
 
-            return RedirectToPage("./Index");
         }
+
+        public void OnPost()
+        {
+            if (updateColor.ShortCode != null)
+            {
+
+                try
+                {
+                    _context.Colors.Update(updateColor);
+                    _context.SaveChanges();
+                }
+                catch
+                {
+                    _context.Colors.Add(updateColor);
+                    _context.SaveChanges();
+                }
+            }
+            
+
+            colorList = _context.Colors.ToList();
+        }
+       
+
+
     }
 }

@@ -4,60 +4,37 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-@section Scripts {
-    <a href="https://www.google.ca/">Google</a>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <partial name="_ValidationScriptsPartial" />
-}
-@*<form asp-page="Index">
-    <div>
-        <label asp-for="Customer.FirstName"></label>
-        <input asp-for="Customer.FirstName" />
-        <span asp-validation-for="Customer.FirstName"></span>
-    </div>
-    <div>
-        <label asp-for="Customer.LastName"></label>
-        <input asp-for="Customer.LastName" />
-        <span asp-validation-for="Customer.LastName"></span>
-    </div>
-    <div>
-        <label asp-for="Customer.Email"></label>
-        <input asp-for="Customer.Email" />
-        <span asp-validation-for="Customer.Email"></span>
-    </div>
-    <div>
-        <input type="submit" value="Submit" />
-    </div>
-</form>*@
+<ul>
+    @foreach (var col in Model.colorList)
+    {
+        <li>
+            <form method="post">
+                <div><label>Title: <input type="text" name="updateColor.ShortCode" value="@col.ShortCode" /></label></div>
+                <div><label>Description: <input type="text" name="updateColor.Name" value="@col.Name" /></label></div>
+                <div><label>Date: <input type="text" name="updateColor.RGB" value="@col.RGB" /></label></div>
+                <div><label>Done: <input type="checkbox" name="color.check" checked="@col.check" /></label></div>
+                <input type="submit" value="Update" />
+            </form>
+            <form asp-page="Colordelete" method="post">
+                <input type="hidden" value="@col.ShortCode" name="updateColor.ShortCode" />
+                <input type="hidden" value="@col.Name" name="updateColor.Name" />
+                <input type="hidden" value="@col.RGB" name="updateColor.RGB" />
+                <input type="hidden" value="@col.time" name="updateColor.time" />
+                <input type="hidden" value="@col.check" name="updateColor.check"/>
+                <input type="Submit" value="Delete" />
+            </form>
+        </li>
 
+    }
+</ul>
 
-<form asp-page="Index">
-    <div>
-            <label asp-for="Customer.FirstName"></label>
-            <input asp-for="Customer.FirstName" />
-            <span asp-validation-for="Customer.FirstName"></span>
-        </div>
-    @*<div>
-            <label asp-for="Customer.LastName"></label>
-            <input asp-for="Customer.LastName" />
-            <span asp-validation-for="Customer.LastName"></span>
-        </div>
-        <div>
-            <label asp-for="Customer.Email"></label>
-            <input asp-for="Customer.Email" />
-            <span asp-validation-for="Customer.Email"></span>
-        </div>*@
-    @*<partial name="_FormInput" for="Customer.FirstName" />
-        <partial name="_FormInput" for="Customer.LastName" />
-        <partial name="_FormInput" for="Customer.Email" />*@
-    <partial name="_FormInput" model="Model.Customer" />
-    <input type="submit" value="Submit" />
-    <label>@Model.Customer.FirstName</label>
+<form method="Get">
+    <label>Title: <input type="text" name="color.ShortCode" /></label>
+    <label>Descriptioin: <input type="text" name="color.Name" /></label>
+    @*<label>Date: @DateTime.Now</label>*@
+    <label>Date: <input type="datetime" name="color.RGB" value="@DateTime.Now" /></label>
+    <label>Done: <input type="checkbox" name="color.check" value="" /></label>
+    
+    <input type="submit" />
 </form>
+
