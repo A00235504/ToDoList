@@ -15,9 +15,9 @@ namespace ToDoList.Pages
         StoreContext _context;
 
         [FromQuery]
-        public Color color { get; set; }
+        public ToDo todo { get; set; }
         [FromForm]
-        public Color updateColor { get; set; }
+        public ToDo updateTodo { get; set; }
 
         public ColordeleteModel(StoreContext context)
         {
@@ -30,9 +30,9 @@ namespace ToDoList.Pages
 
         public RedirectToPageResult OnPost()
         {
-            if (updateColor.ShortCode != null)
+            if (updateTodo.Title != null)
             {
-                _context.Colors.Remove(updateColor);
+                _context.ToDos.Remove(updateTodo);
                 _context.SaveChanges();
             }
 

@@ -17,14 +17,14 @@ namespace ToDoList.Pages
         
 
         [FromQuery]
-        public Color color { get; set; }
+        public ToDo todo { get; set; }
 
         [FromForm]
-        public Color updateColor { get; set; }
+        public ToDo updateTodo { get; set; }
 
         
 
-        public IList<Color> colorList { get; set; } = new List<Color>();
+        public IList<ToDo> todoList { get; set; } = new List<ToDo>();
 
         
 
@@ -37,37 +37,37 @@ namespace ToDoList.Pages
         {
 
   
-            if (color.ShortCode != null)
+            if (todo.Title != null)
             {
                 
-                _context.Colors.Add(color);
+                _context.ToDos.Add(todo);
                 _context.SaveChanges();
             }
 
-            colorList = _context.Colors.ToList();
+            todoList = _context.ToDos.ToList();
            
 
         }
 
         public void OnPost()
         {
-            if (updateColor.ShortCode != null)
+            if (updateTodo.Title != null)
             {
 
                 try
                 {
-                    _context.Colors.Update(updateColor);
+                    _context.ToDos.Update(updateTodo);
                     _context.SaveChanges();
                 }
                 catch
                 {
-                    _context.Colors.Add(updateColor);
+                    _context.ToDos.Add(updateTodo);
                     _context.SaveChanges();
                 }
             }
-            
 
-            colorList = _context.Colors.ToList();
+
+            todoList = _context.ToDos.ToList();
         }
        
 

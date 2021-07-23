@@ -3,25 +3,24 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<h4>Welcome to the ToDo List App</h4>
+<h4>This App is created by Aakash Sadnani</h4>
 <ul>
-    @foreach (var col in Model.colorList)
+    @foreach (var col in Model.todoList)
     {
         <li>
             <form method="post">
-                <div><label>Title: <input type="text" name="updateColor.ShortCode" value="@col.ShortCode" /></label></div>
-                <div><label>Description: <input type="text" name="updateColor.Name" value="@col.Name" /></label></div>
-                <div><label>Date: <input type="text" name="updateColor.RGB" value="@col.RGB" /></label></div>
-                @*<div><label>Done: <input type="checkbox" name="color.check" checked="@col.check" /></label></div>*@
-                <td>@Html.CheckBoxFor(Model => col.check)</td>
+                <div><label>Title: <input type="text" name="updateTodo.Title" value="@col.Title" /></label></div>
+                <div><label>Description: <input type="text" name="updateTodo.Description" value="@col.Description" /></label></div>
+                <div><label>Date: <input type="text" name="updateTodo.Time" value="@col.Time" /></label></div>
+                <div><label>Completed: @Html.CheckBoxFor(m => col.check)</label></div>
                 <input type="submit" value="Update" />
             </form>
             <form asp-page="Colordelete" method="post">
-                <input type="hidden" value="@col.ShortCode" name="updateColor.ShortCode" />
-                <input type="hidden" value="@col.Name" name="updateColor.Name" />
-                <input type="hidden" value="@col.RGB" name="updateColor.RGB" />
-                <input type="hidden" value="@col.time" name="updateColor.time" />
-                <input type="hidden" value="@col.check" name="updateColor.check"/>
+                <input type="hidden" value="@col.Title" name="updateColor.ShortCode" />
+                <input type="hidden" value="@col.Description" name="updateColor.Name" />
+                <input type="hidden" value="@col.Time" name="updateColor.RGB" />
+                <input type="hidden" value="@Model.todo.check" name="updateColor.check"/>
                 <input type="Submit" value="Delete" />
             </form>
         </li>
@@ -30,13 +29,13 @@
 </ul>
 
 <form method="Get">
-    <label>Title: <input type="text" name="color.ShortCode" /></label>
-    <label>Descriptioin: <input type="text" name="color.Name" /></label>
+    <label>Title: <input type="text" name="todo.Title" /></label>
+    <label>Descriptioin: <input type="text" name="todo.Description" /></label>
     @*<label>Date: @DateTime.Now</label>*@
-    <label>Date: <input type="datetime" name="color.RGB" value="@DateTime.Now" /></label>
+    <label>Date: <input type="datetime" name="todo.Time" value="@DateTime.Now" /></label>
     <label>
         Done:
-        @Html.CheckBoxFor(m => Model.color.check)
+        @Html.CheckBoxFor(m => Model.todo.check)
     </label>
     <input type="submit" />
 </form>
