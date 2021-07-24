@@ -37,7 +37,7 @@ namespace ToDoList.Pages
         {
 
   
-            if (todo.Title != null)
+            if (todo.Time != null)
             {
                 
                 _context.ToDos.Add(todo);
@@ -51,17 +51,19 @@ namespace ToDoList.Pages
 
         public void OnPost()
         {
-            if (updateTodo.Title != null)
+            if (updateTodo.Time != null)
             {
 
                 try
                 {
+
                     _context.ToDos.Update(updateTodo);
                     _context.SaveChanges();
                 }
                 catch
                 {
                     _context.ToDos.Add(updateTodo);
+
                     _context.SaveChanges();
                 }
             }
