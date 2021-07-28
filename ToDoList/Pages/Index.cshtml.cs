@@ -57,7 +57,7 @@ namespace ToDoList.Pages
 
                 try
                 {
-                    todo.check = !todo.check;
+                    
                     _context.ToDos.Update(updateTodo);
                     _context.SaveChanges();
                 }
