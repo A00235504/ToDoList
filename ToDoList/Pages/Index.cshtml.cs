@@ -17,6 +17,7 @@ namespace ToDoList.Pages
         
 
         [FromQuery]
+        [FromForm]
         public ToDo todo { get; set; }
 
         [FromForm]
@@ -56,14 +57,13 @@ namespace ToDoList.Pages
 
                 try
                 {
-
+                    todo.check = !todo.check;
                     _context.ToDos.Update(updateTodo);
                     _context.SaveChanges();
                 }
                 catch
                 {
                     _context.ToDos.Add(updateTodo);
-
                     _context.SaveChanges();
                 }
             }

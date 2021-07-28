@@ -12,36 +12,38 @@
 <ul>
     @foreach (var col in Model.todoList)
     {
-        <li>
-            <form method="post">
-                <div><label>Title: <input type="text" name="updateTodo.Title" value="@col.Title" /></label></div>
-                <div><label>Description: <input type="text" name="updateTodo.Description" value="@col.Description" /></label></div>
-                <div><label>Date: <input type="text" name="updateTodo.Time" value="@col.Time" /></label></div>
-                <div><label>Completed: <input type="checkbox" checked="@col.check"></label></div>
-                    <input type="submit" value="Update" />
-                </form>
-                <form asp-page="Colordelete" method="post">
-                    <input type="hidden" value="@col.Title" name="updateTodo.Title" />
-                    <input type="hidden" value="@col.Description" name="updateTodo.Description" />
-                    <input type="hidden" value="@col.Time" name="updateTodo.Time" />
-                    <input type="hidden" value="@col.check" name="updateTodo.check" />
-                    <input type="Submit" value="Delete" />
-                </form>
-           </li>
+    <li>
+        @*<form method="get">*@
+            <partial name="_FormInput" model="@col" />
+            @*<form method="post">
+        <div><label>Title: <input type="text" name="updateTodo.Title" value="@col.Title" /></label></div>
+        <div><label>Description: <input type="text" name="updateTodo.Description" value="@col.Description" /></label></div>
+        <div><label>Date: <input type="text" name="updateTodo.Time" value="@col.Time" /></label></div>
+        <div><label>Completed: <input type="checkbox" checked="@col.check"></label></div>
+            <input type="submit" value="Update" />
+        </form>*@
+            @*<form asp-page="Colordelete" method="post">
+                <input type="hidden" value="@col.Title" name="updateTodo.Title" />
+                <input type="hidden" value="@col.Description" name="updateTodo.Description" />
+                <input type="hidden" value="@col.Time" name="updateTodo.Time" />
+                <input type="hidden" value="@col.check" name="updateTodo.check" />
+                <input type="Submit" value="Delete" />
+            </form>*@
+        @*</form>*@
+    </li>
 
     }
 </ul>
 
 <form method="Get">
-    @*<partial name="_FormInput" model="Model.todo" />*@
-                <label>Title: <input type="text" name="todo.Title" /></label>
-                <label>Description: <input type="text" name="todo.Description" /></label>
-                <label>Date: <input type="datetime" name="todo.Time" value="@DateTime.Now" /></label>
-                <label>
+                <label>Title: <input type="text" name="todo.Title" asp-for="todo.Title"/></label>
+                <label>Description: <input type="text" name="todo.Description" asp-for="todo.Description" /></label>
+                <label>Date: <input type="datetime" name="todo.Time" value="@DateTime.Now" asp-for="todo.Time"/></label>
+                @*<label>
                     Done:
                     @Html.CheckBoxFor(m => Model.todo.check)
-                </label>
-
+                </label>*@
+    <label asp-for="todo.check"></label><input asp-for="todo.check"/>
                 <input type="submit" />
             </form>
 
